@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formulario-salida</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+<body style="background-color: #a3dde8;">
+    <center>
+        <div style="background-color: aqua; width: 600px;">
+        
+        <img style="width: 40%;" src="/public/img/compañia de luz.jpg" alt="">
+        
+    
+        <figure class="text-center">
+            <blockquote class="blockquote">
+                <p class="h2">Compañia de luz</p>
+            </blockquote>
+                <figcaption class="blockquote-footer">
+                Mazatlán Sinaloa México
+                </figcaption>
+        </figure>
+    </div>
+    </center>
+    <form action="/salida" method="post" id="formulario-salida" class="container-xxl" style="width: 600px; background-color: rgb(250, 236, 215);">        
+        <div style="width: 600px; border-radius: 3px;" class="grid text-center" style=" --bs-gap: .25rem 1rem;">
+        <nav class="navbar navbar-expand-md navbar-light ">
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto" class="text-bg-dark p-3">
+                <li class="nav-item">
+                <a class="nav-link" href="#">Acerca de</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Pago de Recibos</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+                </li>
+            </ul>
+            </div>
+        </nav>
+    </div> 
+<div class="container mt-5">
+    <h1>Resultados</h1>            
+    <!-- Tabla con los resultados -->
+    <%
+    
+    var precioK=0;
+    var totalPagar=0;
+
+    if (tiposervicio == 'Domestico') {
+        precioK = 1.08   ;
+    } else if (tiposervicio == 'Comercial') {
+        precioK = 2.5;
+    } else if (tiposervicio == 'Industrial') {
+        precioK = 3.0;
+    }
+    let subtotal = precioK * kilowats;
+
+    let descuento = 0;
+
+    if (kilowats <= 1000) {
+        descuento = subtotal * 0.1;
+    } else if (kilowats > 1000 && kilowats <= 10000) {
+        descuento = subtotal * 0.2;
+    } else if (kilowats > 10000) {
+        descuento = subtotal * 0.5;
+    }
+
+    subtotal -= descuento;
+
+    let impuesto = subtotal * 0.16;
+
+    subtotal += impuesto;
+    totalPagar= subtotal
+    %>            
+    <table class="table table-striped;">
+        <tbody>
+        <tr>
+            <td>            <label for="NumeroRecibo" class="col-4 col-form-label">Numero de Recibo</label>
+            </td>
+            <td><%= NumeroRecibo %></td>
+        </tr>
+        <tr>
+            <td>            <label for="nombre" class="col-4 col-form-label">Nombre</label>
+            </td>
+            <td><%= nombre %></td>
+        </tr>
+        <tr>
+            <td>        <label for="tiposervicio" class="col-4 col-form-label">Tipo de Servicio</label>
+            </td>
+            <td><%= tiposervicio %></td>
+        </tr>
+        <tr>
+            <td>            <label for="kilowats" class="col-4 col-form-label">Kilowats Consumidos</label>
+            </td>
+            <td><%= kilowats %></td>
+        </tr>
+        <tr>
+            <td>subtotal:</td>
+            <td><%= subtotal %></td>
+        </tr>
+        <tr>
+            <td>Total a pagar:</td>
+            <td><%= totalPagar %></td>
+        </tr>
+    </tbody>
+    </table>
+
+    <a href="/" class="btn btn-primary">Volver al formulario</a>
+    </div>
+</form>
+</center>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+</html>
